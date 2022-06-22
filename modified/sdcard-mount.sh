@@ -76,10 +76,12 @@ do_mount()
     if [[ ${ID_FS_TYPE} == "btrfs" ]]; then
         OPTS+=",compress-force=zstd:15"
     fi
+    # Custom ntfs addition from https://github.com/FireGate13/ntfsdeck
+    # the options are from Valve. Read at https://github.com/ValveSoftware/Proton/wiki/Using-a-NTFS-disk-with-Linux-and-Windows
     if [[ ${ID_FS_TYPE} == "ntfs" ]]; then
-        OPTS+=",uid=1000,gid=1000,user,exec,umask=000 -t lowntfs-3g"
+        OPTS+=",uid=1000,gid=1000,user,exec,umask=000 -t lowntfs-3g" 
     fi
-
+    #now the script automounts ext4, btrfs AND ntfs sdCards.
     if [[ ${ID_FS_TYPE} != "ext4" && ${ID_FS_TYPE} != "btrfs" && ${ID_FS_TYPE} != "ntfs" ]]; then
         exit 1
     fi
