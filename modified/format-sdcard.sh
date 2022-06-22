@@ -76,7 +76,7 @@ sync
 parted --script "$SDCARD_DEVICE" mklabel gpt mkpart primary 0% 100%
 sync
 # mkfs.ext4 -m 0 -O casefold -F "$SDCARD_PARTITION"
-mkfs.btrfs -f "$SDCARD_PARTITION"
+mkfs.ntfs -f "$SDCARD_PARTITION"
 sync
 
 rm "$MOUNT_LOCK"
