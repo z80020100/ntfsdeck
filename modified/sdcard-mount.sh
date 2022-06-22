@@ -76,8 +76,11 @@ do_mount()
     if [[ ${ID_FS_TYPE} == "btrfs" ]]; then
         OPTS+=",compress-force=zstd:15"
     fi
+    if [[ ${ID_FS_TYPE} == "ntfs" ]]; then
+        OPTS+=",uid=1000,gid=1000,user,exec,umask=000 -t lowntfs-3g"
+    fi
 
-    if [[ ${ID_FS_TYPE} != "ext4" && ${ID_FS_TYPE} != "btrfs" ]]; then
+    if [[ ${ID_FS_TYPE} != "ext4" && ${ID_FS_TYPE} != "btrfs" && ${ID_FS_TYPE} != "ntfs" ]]; then
         exit 1
     fi
 
