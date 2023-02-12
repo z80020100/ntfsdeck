@@ -73,10 +73,10 @@ dd if=/dev/zero of="$SDCARD_DEVICE" bs=512 count=1024
 # Format as EXT4 with casefolding for proton compatibility
 echo "stage=formatting"
 sync
-parted --script "$SDCARD_DEVICE" mklabel gpt mkpart primary 0% 100%
+parted --script "$SDCARD_DEVICE" mklabel msdos mkpart primary 0% 100%
 sync
 # mkfs.ext4 -m 0 -O casefold -F "$SDCARD_PARTITION"
-mkfs.ntfs -f "$SDCARD_PARTITION"
+mkfs.ntfs -f "$SDCARD_PARTITION" -L mmcblk0p1
 sync
 
 rm "$MOUNT_LOCK"
