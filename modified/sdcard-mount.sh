@@ -95,8 +95,9 @@ do_mount()
     chown 1000:1000 ${MOUNT_POINT}
 
     echo "**** Mounted ${DEVICE} at ${MOUNT_POINT} ****"
-
-    url=$(urlencode ${MOUNT_POINT})
+    STEAM_LIB_DIR="${MOUNT_POINT}/SteamLibrary"
+    /bin/mkdir -p ${STEAM_LIB_DIR}
+    url=$(urlencode ${STEAM_LIB_DIR})
 
     # If Steam is running, notify it
     if pgrep -x "steam" > /dev/null; then
@@ -108,7 +109,8 @@ do_mount()
 
 do_unmount()
 {
-    url=$(urlencode ${MOUNT_POINT})
+    STEAM_LIB_DIR="${MOUNT_POINT}/SteamLibrary"
+    url=$(urlencode ${STEAM_LIB_DIR})
 
     # If Steam is running, notify it
     if pgrep -x "steam" > /dev/null; then
